@@ -28,18 +28,16 @@ static BOOL getBoolFromPreferences(NSMutableDictionary *preferences, NSString *p
 
 %ctor{
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    NSLog(@"yujianbo: init!!!!!!");
     NSString *appId = [[NSBundle mainBundle] bundleIdentifier];
     // Load  preferences
     NSMutableDictionary *preferences = [[NSMutableDictionary alloc] initWithContentsOfFile:preferenceFilePath];
     id shouldHook = [preferences objectForKey:appId];
     if ( (shouldHook == nil) || (! [shouldHook boolValue]) ) {
-        NSLog(@"yujianbo: did not find plist");
+        NSLog(@"yujianbo: did not find plist or app did not in list");
         [preferences release];
         [pool drain];
         return;
     }
-    NSLog(@"yujianbo: get plist");
 
     if (getBoolFromPreferences(preferences, @"MITM")) {
         NSLog(@"yujianbo: start MITM");

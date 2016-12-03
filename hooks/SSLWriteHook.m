@@ -69,7 +69,7 @@ static OSStatus replaced_SSLWrite(SSLContextRef context,
 @implementation SSLWriteHook
 
 + (void)enableHook{
-    NSLog(@"yujianbo: enable ssl hook");
+//    NSLog(@"yujianbo: enable ssl hook");
     MSHookFunction((void *) SSLWrite,(void *)  replaced_SSLWrite, (void **) &original_SSLWrite);
 }
 

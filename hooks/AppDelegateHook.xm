@@ -6,7 +6,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    NSLog(@"yujianbo: start traffic");
+//    NSLog(@"yujianbo: start traffic");
     //注册protocol
     [NSURLProtocol registerClass:[CustomURLProtocol class]];
     return %orig;

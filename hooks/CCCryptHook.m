@@ -97,7 +97,7 @@ CCCryptorStatus replaced_CCCrypt(
 @implementation CCCryptHook
 
 + (void)enableHook{
-    NSLog(@"yujianbo: Start hook cccrypt");
+//    NSLog(@"yujianbo: Start hook cccrypt");
     MSHookFunction((void *) CCCrypt,(void *)  replaced_CCCrypt, (void **) &original_CCCrypt);  
 }
 
