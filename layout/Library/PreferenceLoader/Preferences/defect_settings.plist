@@ -15,6 +15,14 @@
 	<array>
 		<dict>
 			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>General Settings</string>
+			<key>New item</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>default</key>
 			<false/>
@@ -48,6 +56,34 @@
 			<string>CCCrypt</string>
 			<key>label</key>
 			<string>CCCrypt</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Server Settings</string>
+			<key>New item</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>defaults</key>
+			<string>com.softsec.iosdefect.plist</string>
+			<key>label</key>
+			<string>Server IP</string>
+			<key>key</key>
+			<string>ServerIP</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>defaults</key>
+			<string>com.softsec.iosdefect.plist</string>
+			<key>label</key>
+			<string>Server Port</string>
+			<key>key</key>
+			<string>ServerPort</string>
 		</dict>
 	</array>
 	<key>title</key>

@@ -9,7 +9,7 @@
 #import "SocketClass.h"
 
 
-#define PREFERENCE_PATH @"/var/mobile/Library/Preferences/SocketServerConfig.plist"
+#define PREFERENCE_PATH @"/private/var/mobile/Library/Preferences/com.softsec.iosdefect.plist"
 
 //NSString *gstring ;
 
@@ -31,8 +31,8 @@
             
             
             
-            NSString *IPaddress = [prefDic objectForKey:@"IP"];
-            NSString *IPport = [prefDic objectForKey:@"PORT"];
+            NSString *IPaddress = [prefDic objectForKey:@"ServerIP"];
+            NSString *IPport = [prefDic objectForKey:@"ServerPort"];
 //            NSString *IPaddress = @"192.168.3.209";
 //            NSString *IPport = @"9001";
 //            NSLog(@"IPaddress is qwe %@,%@",IPaddress,string_send);
