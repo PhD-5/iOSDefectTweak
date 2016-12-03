@@ -1,0 +1,61 @@
+#import "hooks/CustomURLProtocol.h"
+#import "hooks/SocketClass.h"
+
+//Hooks for C functions
+#import "hooks/CCCryptHook.h"
+#import "hooks/SSLWriteHook.h"
+
+//Hooks for OC functions
+%group MITM 
+#include "hooks/NSUIWebViewHook.xm" 
+#include "hooks/NSURLConnectionHook.xm" 
+#include "hooks/NSURLSessionHook.xm" 
+%end // end group
+
+%group Traffic
+#include "hooks/AppDelegateHook.xm" 
+%end
+
+static NSString *preferenceFilePath = @"/private/var/mobile/Library/Preferences/com.softsec.iosdefect.plist";
+
+static BOOL getBoolFromPreferences(NSMutableDictionary *preferences, NSString *preferenceValue) {
+    id value = [preferences objectForKey:preferenceValue];
+    if (value == nil) {
+        return YES; // default to YES
+    }
+    return [value boolValue];
+}
+
+%ctor{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    NSLog(@"yujianbo: init!!!!!!");
+    NSString *appId = [[NSBundle mainBundle] bundleIdentifier];
+    // Load  preferences
+    NSMutableDictionary *preferences = [[NSMutableDictionary alloc] initWithContentsOfFile:preferenceFilePath];
+    id shouldHook = [preferences objectForKey:appId];
+    if ( (shouldHook == nil) || (! [shouldHook boolValue]) ) {
+        NSLog(@"yujianbo: did not find plist");
+        [preferences release];
+        [pool drain];
+        return;
+    }
+    NSLog(@"yujianbo: get plist");
+
+    if (getBoolFromPreferences(preferences, @"MITM")) {
+        NSLog(@"yujianbo: start MITM");
+        %init(MITM);
+        [SSLWriteHook enableHook];
+    }
+    if (getBoolFromPreferences(preferences, @"Traffic")) {
+        NSLog(@"yujianbo: start Traffic");
+        %init(Traffic);
+    }
+    if (getBoolFromPreferences(preferences, @"CCCrypt")) {
+        NSLog(@"yujianbo: start CCCrypt");
+        [CCCryptHook enableHook];
+    }
+
+    
+    [preferences release];
+    [pool drain];
+}
