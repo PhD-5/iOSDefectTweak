@@ -54,10 +54,10 @@ static NSString *serializedNilValue = @"nil";
 	}
 
 	NSDictionary *url_dict = nil;
-	NSString *scheme = [aURL scheme];
+//	NSString *scheme = [aURL scheme];
 	if (aURL != nil) {
 		// store specific infoz if its an HTTP URL
-		if ([scheme isEqualToString:@"http"] || [scheme isEqualToString:@"https"]) {
+//		if ([scheme isEqualToString:@"http"] || [scheme isEqualToString:@"https"]) {
 		  	url_dict = [NSDictionary dictionaryWithObjects:
 				   		[NSArray arrayWithObjects: [aURL absoluteString],
 		 			      	[aURL scheme],
@@ -76,14 +76,15 @@ static NSString *serializedNilValue = @"nil";
 							@"parameterString",
 					      	@"query", nil]];
 		// otherwise just store the whole string for now.
-		} else {
-		  url_dict = [NSDictionary dictionaryWithObjects:
-					      [NSArray arrayWithObjects:
-					      		[aURL absoluteString], nil]
-					   forKeys:
-					      [NSArray arrayWithObjects:
-					      		@"absoluteString", nil]];
-		}
+//		} 
+//        else {
+//		  url_dict = [NSDictionary dictionaryWithObjects:
+//					      [NSArray arrayWithObjects:
+//					      		[aURL absoluteString], nil]
+//					   forKeys:
+//					      [NSArray arrayWithObjects:
+//					      		@"absoluteString", nil]];
+//		}
 	}
 	return url_dict;
 }

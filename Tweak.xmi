@@ -17,6 +17,9 @@
 #include "hooks/TrafficHook.xm" 
 %end
 
+%group URL
+#include "hooks/URLHook.xm"
+%end
 
 static NSString *preferenceFilePath = @"/private/var/mobile/Library/Preferences/com.softsec.iosdefect.plist";
 
@@ -32,6 +35,7 @@ static BOOL getBoolFromPreferences(NSMutableDictionary *preferences, NSString *p
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     //init default tweak
+    %init(URL);
     
     NSString *appId = [[NSBundle mainBundle] bundleIdentifier];
     // Load  preferences
