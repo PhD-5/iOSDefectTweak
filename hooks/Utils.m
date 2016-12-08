@@ -29,7 +29,7 @@
 
 //
 //// What we store in the plist if the object's pointer is nil
-//static NSString *serializedNilValue = @"nil";
+static NSString *serializedNilValue = @"nil";
 //
 //
 //+ (NSString *) getSerializedNilValue {
@@ -38,55 +38,55 @@
 //
 //
 //// Utility function to automatically convert nil to an empty string
-//+ (id) autoConvertNil:(id) pointer {
-//	if (pointer == nil) {
-//		return serializedNilValue;
-//	}
-//	else {
-//		return pointer;
-//	}
-//}
++ (id) autoConvertNil:(id) pointer {
+	if (pointer == nil) {
+		return serializedNilValue;
+	}
+	else {
+		return pointer;
+	}
+}
 //
 //
-//+ (NSDictionary *) convertURL:(NSURL *)aURL {
-//	if (aURL == nil) {
-//		return [NSDictionary dictionary];
-//	}
-//
-//	NSDictionary *url_dict = nil;
-//	NSString *scheme = [aURL scheme];
-//	if (aURL != nil) {
-//		// store specific infoz if its an HTTP URL
-//		if ([scheme isEqualToString:@"http"] || [scheme isEqualToString:@"https"]) {
-//		  	url_dict = [NSDictionary dictionaryWithObjects:
-//				   		[NSArray arrayWithObjects: [aURL absoluteString],
-//		 			      	[aURL scheme],
-//					      	[aURL host],
-//					      	[PlistObjectConverter autoConvertNil: [aURL port]],
-//					      	[aURL path],
-//							[PlistObjectConverter autoConvertNil: [aURL parameterString]],
-//					      	[PlistObjectConverter autoConvertNil: [aURL query]], nil]
-//			      	   	forKeys:
-//					    [NSArray arrayWithObjects:
-//				    	    @"absoluteString",
-//  						    @"scheme",
-//					      	@"host",
-//							@"port",
-//					    	@"path",
-//							@"parameterString",
-//					      	@"query", nil]];
-//		// otherwise just store the whole string for now.
-//		} else {
-//		  url_dict = [NSDictionary dictionaryWithObjects:
-//					      [NSArray arrayWithObjects:
-//					      		[aURL absoluteString], nil]
-//					   forKeys:
-//					      [NSArray arrayWithObjects:
-//					      		@"absoluteString", nil]];
-//		}
-//	}
-//	return url_dict;
-//}
++ (NSDictionary *) convertURL:(NSURL *)aURL {
+	if (aURL == nil) {
+		return [NSDictionary dictionary];
+	}
+
+	NSDictionary *url_dict = nil;
+	NSString *scheme = [aURL scheme];
+	if (aURL != nil) {
+		// store specific infoz if its an HTTP URL
+		if ([scheme isEqualToString:@"http"] || [scheme isEqualToString:@"https"]) {
+		  	url_dict = [NSDictionary dictionaryWithObjects:
+				   		[NSArray arrayWithObjects: [aURL absoluteString],
+		 			      	[aURL scheme],
+					      	[aURL host],
+					      	[Utils autoConvertNil: [aURL port]],
+					      	[aURL path],
+							[Utils autoConvertNil: [aURL parameterString]],
+					      	[Utils autoConvertNil: [aURL query]], nil]
+			      	   	forKeys:
+					    [NSArray arrayWithObjects:
+				    	    @"absoluteString",
+  						    @"scheme",
+					      	@"host",
+							@"port",
+					    	@"path",
+							@"parameterString",
+					      	@"query", nil]];
+		// otherwise just store the whole string for now.
+		} else {
+		  url_dict = [NSDictionary dictionaryWithObjects:
+					      [NSArray arrayWithObjects:
+					      		[aURL absoluteString], nil]
+					   forKeys:
+					      [NSArray arrayWithObjects:
+					      		@"absoluteString", nil]];
+		}
+	}
+	return url_dict;
+}
 //
 //
 //// Convert an NSURLRequest to an NSDictionary suitable for plist storage.

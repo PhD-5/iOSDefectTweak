@@ -8,8 +8,8 @@
 //// Plist objects are string, number, boolean, date, data, dictionary and array.
 //// We need to convert anything that's not a plist object to a dictionnary so we can store it.
 //+ (NSString *) getSerializedNilValue;
-//+ (id) autoConvertNil: (id) pointer;
-//+ (NSDictionary *) convertURL:(NSURL *)aURL;
++ (id) autoConvertNil: (id) pointer;
++ (NSDictionary *) convertURL:(NSURL *)aURL;
 //+ (NSDictionary *) convertNSURLRequest:(NSURLRequest *)request;
 //+ (NSDictionary *) convertNSURLResponse:(NSURLResponse *)response;
 //+ (NSDictionary *) convertNSCachedURLResponse:(NSCachedURLResponse *)response;

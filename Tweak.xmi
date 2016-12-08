@@ -1,5 +1,6 @@
 #import "hooks/CustomURLProtocol.h"
 #import "hooks/SocketClass.h"
+#import "hooks/DelegateProxies.h"
 
 //Hooks for C functions
 #import "hooks/CCCryptHook.h"
@@ -13,8 +14,9 @@
 %end // end group
 
 %group Traffic
-#include "hooks/AppDelegateHook.xm" 
+#include "hooks/TrafficHook.xm" 
 %end
+
 
 static NSString *preferenceFilePath = @"/private/var/mobile/Library/Preferences/com.softsec.iosdefect.plist";
 
@@ -28,6 +30,9 @@ static BOOL getBoolFromPreferences(NSMutableDictionary *preferences, NSString *p
 
 %ctor{
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    //init default tweak
+    
     NSString *appId = [[NSBundle mainBundle] bundleIdentifier];
     // Load  preferences
     NSMutableDictionary *preferences = [[NSMutableDictionary alloc] initWithContentsOfFile:preferenceFilePath];
@@ -52,8 +57,6 @@ static BOOL getBoolFromPreferences(NSMutableDictionary *preferences, NSString *p
         NSLog(@"yujianbo: start CCCrypt");
         [CCCryptHook enableHook];
     }
-
-    
     [preferences release];
     [pool drain];
 }
