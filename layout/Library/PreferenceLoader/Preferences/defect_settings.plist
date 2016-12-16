@@ -18,8 +18,6 @@
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>General Settings</string>
-			<key>New item</key>
-			<string></string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -62,8 +60,6 @@
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>Server Settings</string>
-			<key>New item</key>
-			<string></string>
 		</dict>
 		<dict>
 			<key>cell</key>

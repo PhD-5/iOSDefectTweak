@@ -2,7 +2,7 @@
 #import <Security/SecureTransport.h>
 #import "SocketClass.h"
 #import "SSLWriteHook.h"
-
+extern SocketClass *gsocket;
 //static NSString *preferenceFilePath = @"/private/var/mobile/Library/Preferences/com.softsec.iosdefect.plist";
 //
 //static BOOL getBoolFromPreferences(NSMutableDictionary *preferences, NSString *preferenceValue) {
@@ -24,7 +24,7 @@ static OSStatus replaced_SSLWrite(SSLContextRef context,
                                   const void *data, 
                                   size_t dataLength, 
                                   size_t *processed){
-    SocketClass *socket = [[SocketClass alloc] init];
+//    SocketClass *socket = [[SocketClass alloc] init];
     NSString *bundleID = [[NSBundle mainBundle]bundleIdentifier];
 //    NSString *appName = [[[NSBundle mainBundle]infoDictionary] objectForKey:@"CFBundleDisplayName"];
     NSLog(@"%@ SSLWrite len :%zu",bundleID,dataLength);
@@ -45,21 +45,21 @@ static OSStatus replaced_SSLWrite(SSLContextRef context,
         if(range1.location != NSNotFound){
             NSLog(@"%@ SSLWrite :NSURLConnection has MITM",bundleID);
             
-            [socket SendSocket:@"SSLWrite :NSURLConnection has MITM"];
+            [gsocket SendSocket:@"SSLWrite :NSURLConnection has MITM"];
         }
         
         NSRange range2 = [info rangeOfString:@"/UIWebView.html"];
         if(range2.location != NSNotFound){
             NSLog(@"%@ SSLWrite :UIWebView has MITM",bundleID);
             
-            [socket SendSocket:@"SSLWrite :UIWebView has MITM"];
+            [gsocket SendSocket:@"SSLWrite :UIWebView has MITM"];
         }
         
         NSRange range3 = [info rangeOfString:@"/URLSession.html"];
         if(range3.location != NSNotFound){
             NSLog(@"%@ SSLWrite :NSURLSession has MITM",bundleID);
             
-            [socket SendSocket:@"SSLWrite :NSURLSession has MITM"];
+            [gsocket SendSocket:@"SSLWrite :NSURLSession has MITM"];
         }
     }
     

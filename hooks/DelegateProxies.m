@@ -5,7 +5,7 @@
 
 
 // Nice global
-//extern SQLiteStorage *traceStorage;
+extern SocketClass *gsocket;
 
 
 @implementation GenericDelegateProx
@@ -50,8 +50,8 @@
     NSDictionary * urlDict = [Utils convertURL: url];
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:urlDict options:0 error:nil]; 
     NSString * urlStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    SocketClass *socket = [[SocketClass alloc] init];
-    [socket SendSocket:urlStr];
+//    SocketClass *socket = [[SocketClass alloc] init];
+    [gsocket SendSocket:urlStr];
     
     
 //    CallTracer *tracer = [[CallTracer alloc] initWithClass:@"UIApplicationDelegate" andMethod:@"application:handleOpenURL:"];
@@ -72,8 +72,8 @@
     NSDictionary * urlDict = [Utils convertURL: url];
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:urlDict options:0 error:nil]; 
     NSString * urlStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    SocketClass *socket = [[SocketClass alloc] init];
-    [socket SendSocket:urlStr];
+//    SocketClass *socket = [[SocketClass alloc] init];
+    [gsocket SendSocket:urlStr];
     
 //    CallTracer *tracer = [[CallTracer alloc] initWithClass:@"UIApplicationDelegate" andMethod:@"application:openURL:sourceApplication:annotation:"];
 //    [tracer addArgFromPlistObject:@"Introspy - not implemented" withKey:@"application"];

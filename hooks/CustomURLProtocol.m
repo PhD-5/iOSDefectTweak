@@ -5,6 +5,7 @@
 //
 
 #import "CustomURLProtocol.h"
+extern SocketClass *gsocket;
 
 static NSString * const URLProtocolHandledKey = @"URLProtocolHandledKey";
 
@@ -36,7 +37,7 @@ static NSString * const URLProtocolHandledKey = @"URLProtocolHandledKey";
 + (NSURLRequest *) canonicalRequestForRequest:(NSURLRequest *)request {
     NSMutableURLRequest *mutableReqeust = [request mutableCopy];
 //    mutableReqeust = [self redirectHostInRequset:mutableReqeust];
-    SocketClass *socket = [[SocketClass alloc] init];
+//    SocketClass *socket = [[SocketClass alloc] init];
     NSMutableString * socketStr = [[NSMutableString alloc] init];
 //    [socket SendSocket:[request.URL absoluteString]];
     [socketStr appendString:@"url:"];
@@ -50,7 +51,7 @@ static NSString * const URLProtocolHandledKey = @"URLProtocolHandledKey";
         [socketStr appendString:@"body:"];
         [socketStr appendString:decoded];
     }
-    [socket SendSocket:socketStr];
+    [gsocket SendSocket:socketStr];
     
     return mutableReqeust;
 }

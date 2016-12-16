@@ -6,6 +6,10 @@
 #import "hooks/CCCryptHook.h"
 #import "hooks/SSLWriteHook.h"
 
+
+SocketClass *gsocket ;
+
+
 //Hooks for OC functions
 %group MITM 
 #include "hooks/NSUIWebViewHook.xm" 
@@ -25,6 +29,8 @@
 #include "hooks/KeyboardHook.xm"
 %end
 
+
+
 static NSString *preferenceFilePath = @"/private/var/mobile/Library/Preferences/com.softsec.iosdefect.plist";
 
 static BOOL getBoolFromPreferences(NSMutableDictionary *preferences, NSString *preferenceValue) {
@@ -37,6 +43,8 @@ static BOOL getBoolFromPreferences(NSMutableDictionary *preferences, NSString *p
 
 %ctor{
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    gsocket = [[SocketClass alloc] init];
     
     NSString *appId = [[NSBundle mainBundle] bundleIdentifier];
     // Load  preferences
