@@ -21,12 +21,16 @@
 #include "hooks/URLHook.xm"
 %end
 
+%group keyboardHook
+#include "hooks/KeyboardHook.xm"
+%end
+
 static NSString *preferenceFilePath = @"/private/var/mobile/Library/Preferences/com.softsec.iosdefect.plist";
 
 static BOOL getBoolFromPreferences(NSMutableDictionary *preferences, NSString *preferenceValue) {
     id value = [preferences objectForKey:preferenceValue];
     if (value == nil) {
-        return YES; // default to YES
+        return NO; // default to NO
     }
     return [value boolValue];
 }
@@ -34,19 +38,21 @@ static BOOL getBoolFromPreferences(NSMutableDictionary *preferences, NSString *p
 %ctor{
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
-    //init default tweak
-    %init(URL);
-    
     NSString *appId = [[NSBundle mainBundle] bundleIdentifier];
     // Load  preferences
     NSMutableDictionary *preferences = [[NSMutableDictionary alloc] initWithContentsOfFile:preferenceFilePath];
     id shouldHook = [preferences objectForKey:appId];
     if ( (shouldHook == nil) || (! [shouldHook boolValue]) ) {
-        NSLog(@"yujianbo: did not find plist or app did not in list");
+        NSLog(@"yujianbo: the app [%@] is not in list",appId);
         [preferences release];
         [pool drain];
         return;
     }
+    
+    NSLog(@"yujianbo: the app [%@] is in list",appId);
+    //init default tweak
+    %init(URL);
+    %init(keyboardHook);
 
     if (getBoolFromPreferences(preferences, @"MITM")) {
         NSLog(@"yujianbo: start MITM");
