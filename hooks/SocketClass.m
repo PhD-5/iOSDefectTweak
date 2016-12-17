@@ -11,7 +11,6 @@
 
 #define PREFERENCE_PATH @"/private/var/mobile/Library/Preferences/com.softsec.iosdefect.plist"
 
-//NSString *gstring ;
 
 @implementation SocketClass
 
@@ -19,18 +18,15 @@
 
 -(void)SendSocket:(NSString *)string_send
 {
-    NSLog(@"yujianbo socket will send[NSString] %@",string_send);
 //    NSString *processName = [[NSProcessInfo processInfo] processName];
   
     NSDictionary *prefDic = [NSDictionary dictionaryWithContentsOfFile:PREFERENCE_PATH];
+    
 //    NSString *isListening = [prefDic objectForKey:@"isListening"];
 //    NSLog(@"lw: islistening %@",isListening);
 //    if (TRUE)
 //    {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            
-            
             NSString *IPaddress = [prefDic objectForKey:@"ServerIP"];
             NSString *IPport = [prefDic objectForKey:@"ServerPort"];
 //            NSString *IPaddress = @"192.168.3.209";
@@ -38,8 +34,9 @@
 //            NSLog(@"IPaddress is qwe %@,%@",IPaddress,string_send);
 //            const char *sendmsg = [string_send cStringUsingEncoding:NSUTF8StringEncoding];
 //            const char *sendmsg = [string_send cStringUsingEncoding:NSASCIIStringEncoding];
+            NSLog(@"yujianbo NSString:%@",string_send);
             const char *sendmsg = [string_send UTF8String];
-            NSLog(@"yujianbo socket will send[char*] %s",sendmsg);
+            NSLog(@"yujianbo char  * :%s",sendmsg);
             int sockfd;
             struct sockaddr_in des_addr;
             
