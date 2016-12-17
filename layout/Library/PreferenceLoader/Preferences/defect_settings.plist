@@ -25,7 +25,7 @@
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.softsec.iosdefect.plist</string>
+			<string>com.softsec.iosdefect.settings.plist</string>
 			<key>key</key>
 			<string>MITM</string>
 			<key>label</key>
@@ -37,7 +37,7 @@
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.softsec.iosdefect.plist</string>
+			<string>com.softsec.iosdefect.settings.plist</string>
 			<key>key</key>
 			<string>Traffic</string>
 			<key>label</key>
@@ -49,7 +49,7 @@
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.softsec.iosdefect.plist</string>
+			<string>com.softsec.iosdefect.settings.plist</string>
 			<key>key</key>
 			<string>CCCrypt</string>
 			<key>label</key>
@@ -65,7 +65,7 @@
 			<key>cell</key>
 			<string>PSEditTextCell</string>
 			<key>defaults</key>
-			<string>com.softsec.iosdefect.plist</string>
+			<string>com.softsec.iosdefect.socket.plist</string>
 			<key>label</key>
 			<string>Server IP</string>
 			<key>key</key>
@@ -75,7 +75,7 @@
 			<key>cell</key>
 			<string>PSEditTextCell</string>
 			<key>defaults</key>
-			<string>com.softsec.iosdefect.plist</string>
+			<string>com.softsec.iosdefect.socket.plist</string>
 			<key>label</key>
 			<string>Server Port</string>
 			<key>key</key>

@@ -5,9 +5,9 @@
 		icon = "/Library/PreferenceLoader/Preferences/defect.png";
 		isController = 1;
 		label = "iosDefect - Apps";
-		ALSettingsPath = "/var/mobile/Library/Preferences/com.softsec.iosdefect.plist";
+		ALSettingsPath = "/var/mobile/Library/Preferences/com.softsec.iosdefect.app.plist";
 		ALSettingsKeyPrefix = "";
-		ALChangeNotification = "com.softsec.iosdefect";
+		ALChangeNotification = "com.softsec.iosdefect.app";
 		ALAllowsSelection = 1;
 		ALSectionDescriptors = (
 			{

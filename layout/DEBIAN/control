@@ -1,7 +1,7 @@
 Package: com.softsec.iosdefectdynamicanalyse
 Name: iOSDefectDynamicAnalyse
 Depends: mobilesubstrate,preferenceloader, applist, firmware(>=8.0)
-Version: 0.0.1
+Version: 1.0.0
 Architecture: iphoneos-arm
 Description: An awesome MobileSubstrate tweak!
 Maintainer: softsec

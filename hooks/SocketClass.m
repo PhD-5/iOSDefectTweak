@@ -9,7 +9,7 @@
 #import "SocketClass.h"
 
 
-#define PREFERENCE_PATH @"/private/var/mobile/Library/Preferences/com.softsec.iosdefect.plist"
+#define PREFERENCE_PATH @"/private/var/mobile/Library/Preferences/com.softsec.iosdefect.socket.plist"
 
 
 @implementation SocketClass

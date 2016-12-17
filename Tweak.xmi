@@ -31,7 +31,8 @@ SocketClass *gsocket ;
 
 
 
-static NSString *preferenceFilePath = @"/private/var/mobile/Library/Preferences/com.softsec.iosdefect.plist";
+static NSString *applistPreferenceFilePath = @"/private/var/mobile/Library/Preferences/com.softsec.iosdefect.app.plist";
+static NSString *settingsPreferenceFilePath = @"/private/var/mobile/Library/Preferences/com.softsec.iosdefect.settings.plist";
 
 static BOOL getBoolFromPreferences(NSMutableDictionary *preferences, NSString *preferenceValue) {
     id value = [preferences objectForKey:preferenceValue];
@@ -41,40 +42,44 @@ static BOOL getBoolFromPreferences(NSMutableDictionary *preferences, NSString *p
     return [value boolValue];
 }
 
+
+
 %ctor{
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     gsocket = [[SocketClass alloc] init];
     
     NSString *appId = [[NSBundle mainBundle] bundleIdentifier];
-    // Load  preferences
-    NSMutableDictionary *preferences = [[NSMutableDictionary alloc] initWithContentsOfFile:preferenceFilePath];
-    id shouldHook = [preferences objectForKey:appId];
-    if ( (shouldHook == nil) || (! [shouldHook boolValue]) ) {
+    // Load applist preferences
+    NSMutableDictionary *appPreferences = [[NSMutableDictionary alloc] initWithContentsOfFile:applistPreferenceFilePath];
+    
+    if (! getBoolFromPreferences(appPreferences,appId) ) {
         NSLog(@"yujianbo: the app [%@] is not in list",appId);
-        [preferences release];
+        [appPreferences release];
         [pool drain];
         return;
     }
-    
+    //load settings preferences
+    NSMutableDictionary *settingsPreferences = [[NSMutableDictionary alloc] initWithContentsOfFile:settingsPreferenceFilePath];
     NSLog(@"yujianbo: the app [%@] is in list",appId);
     //init default tweak
     %init(URL);
     %init(keyboardHook);
 
-    if (getBoolFromPreferences(preferences, @"MITM")) {
+    if (getBoolFromPreferences(settingsPreferences, @"MITM")) {
         NSLog(@"yujianbo: start MITM");
         %init(MITM);
         [SSLWriteHook enableHook];
     }
-    if (getBoolFromPreferences(preferences, @"Traffic")) {
+    if (getBoolFromPreferences(settingsPreferences, @"Traffic")) {
         NSLog(@"yujianbo: start Traffic");
         %init(Traffic);
     }
-    if (getBoolFromPreferences(preferences, @"CCCrypt")) {
+    if (getBoolFromPreferences(settingsPreferences, @"CCCrypt")) {
         NSLog(@"yujianbo: start CCCrypt");
         [CCCryptHook enableHook];
     }
-    [preferences release];
+    [appPreferences release];
+    [settingsPreferences release];
     [pool drain];
 }
