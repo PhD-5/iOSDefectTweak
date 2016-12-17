@@ -1,5 +1,5 @@
 #import "SocketClass.h"
-
+#import "Utils.h"
 
 NSMutableString *INPUT = [[NSMutableString alloc] initWithCapacity:100];
 
@@ -18,7 +18,8 @@ NSMutableString *INPUT = [[NSMutableString alloc] initWithCapacity:100];
 
 - (void)keyboardDidHide:(id)arg1{
     if([INPUT length]>0){
-        NSString *inputString = [NSString stringWithFormat:@"input:%@",INPUT]; 
+//        NSString *inputString = [NSString stringWithFormat:@"input:%@",INPUT]; 
+        NSString *inputString=[Utils getJsonStrWithDic:INPUT andType:@"input"];
         SocketClass *mysocket = [[SocketClass alloc] init];
         [mysocket SendSocket:(NSString *)inputString];
         [INPUT setString:@""];
@@ -40,7 +41,8 @@ NSMutableString *INPUT = [[NSMutableString alloc] initWithCapacity:100];
         }
     }else if([name isEqualToString:@"Return-Key"]){
         if([INPUT length]>0){
-            NSString *inputString = [NSString stringWithFormat:@"input:%@",INPUT]; 
+//            NSString *inputString = [NSString stringWithFormat:@"input:%@",INPUT]; 
+            NSString *inputString=[Utils getJsonStrWithDic:INPUT andType:@"input"];
             SocketClass *mysocket = [[SocketClass alloc] init];
             [mysocket SendSocket:(NSString *)inputString];
             [INPUT setString:@""];

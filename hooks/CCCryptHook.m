@@ -155,10 +155,9 @@ static CCCryptorStatus replaced_CCCrypt(
 //        NSData *inputData = [Utils convertCBuffer:dataIn withLength:dataInLength];
 //        [mDict setValue:[[NSString alloc] initWithData:inputData encoding:NSUTF8StringEncoding] forKey:@"inputData"];
         
-        //socket send
-//        SocketClass *socket = [[SocketClass alloc] init];
-        NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mDict options:0 error:nil];  
-        NSString * myString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]; 
+        //set message type
+        NSString * myString = [Utils getJsonStrWithDic:mDict andType:@"CCCrypt"]; 
+    
         [gsocket SendSocket:myString];
 //    }
     

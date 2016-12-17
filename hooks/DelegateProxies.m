@@ -44,45 +44,27 @@ extern SocketClass *gsocket;
 @implementation UIApplicationDelegateProxForURL
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    BOOL origResult = [originalDelegate application:application handleOpenURL:url];
+        BOOL origResult = [originalDelegate application:application handleOpenURL:url];
     
     //get url info
     NSDictionary * urlDict = [Utils convertURL: url];
-    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:urlDict options:0 error:nil]; 
-    NSString * urlStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-//    SocketClass *socket = [[SocketClass alloc] init];
+   
+    NSString * urlStr = [Utils getJsonStrWithDic:urlDict andType:@"URLScheme"];
     [gsocket SendSocket:urlStr];
+
     
-    
-//    CallTracer *tracer = [[CallTracer alloc] initWithClass:@"UIApplicationDelegate" andMethod:@"application:handleOpenURL:"];
-//    [tracer addArgFromPlistObject:@"Introspy - not implemented" withKey:@"application"];
-//    [tracer addArgFromPlistObject:[PlistObjectConverter convertURL: url] withKey:@"url"];
-//    [tracer addReturnValueFromPlistObject: [NSNumber numberWithBool:origResult]];
-//    [traceStorage saveTracedCall:tracer];
-//    [tracer release];
     return origResult;
-    }
+}
 
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     BOOL origResult = [originalDelegate application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
     
-    
     //get url info
     NSDictionary * urlDict = [Utils convertURL: url];
-    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:urlDict options:0 error:nil]; 
-    NSString * urlStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-//    SocketClass *socket = [[SocketClass alloc] init];
+    NSString * urlStr = [Utils getJsonStrWithDic:urlDict andType:@"URLScheme"];
     [gsocket SendSocket:urlStr];
     
-//    CallTracer *tracer = [[CallTracer alloc] initWithClass:@"UIApplicationDelegate" andMethod:@"application:openURL:sourceApplication:annotation:"];
-//    [tracer addArgFromPlistObject:@"Introspy - not implemented" withKey:@"application"];
-//    [tracer addArgFromPlistObject:[PlistObjectConverter convertURL: url] withKey:@"url"];
-//    [tracer addArgFromPlistObject:sourceApplication withKey:@"sourceApplication"];
-//    [tracer addArgFromPlistObject:annotation withKey:@"annotation"];
-//    [tracer addReturnValueFromPlistObject: [NSNumber numberWithBool:origResult]];
-//    [traceStorage saveTracedCall:tracer];
-//    [tracer release];
     return origResult;
 }
 

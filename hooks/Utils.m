@@ -583,7 +583,12 @@ static NSString *serializedNilValue = @"nil";
 //	return delegateMethodsArray;
 //}
 
-
++ (NSString *) getJsonStrWithDic:(id) dict andType:(NSString *)type{
+    NSDictionary *dictWithType = [NSDictionary dictionaryWithObjectsAndKeys:dict,@"msg",type,@"type",nil];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictWithType options:0 error:nil];
+    NSString *str = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    return str;
+}
 
 
 @end

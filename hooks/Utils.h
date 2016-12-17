@@ -30,4 +30,6 @@
 //+ (NSDictionary *) convertSecKeyRef:(SecKeyRef) key;
 
 + (NSData *) convertCBuffer:(const void *) buffer withLength: (size_t) length;
+
++ (NSString *) getJsonStrWithDic:(id) dict andType:(NSString *)type;
 @end
