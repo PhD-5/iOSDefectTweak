@@ -5,6 +5,7 @@
 //Hooks for C functions
 #import "hooks/CCCryptHook.h"
 #import "hooks/SSLWriteHook.h"
+#import "hooks/KeychainHooks.h"
 
 
 SocketClass *gsocket ;
@@ -79,6 +80,11 @@ static BOOL getBoolFromPreferences(NSMutableDictionary *preferences, NSString *p
         NSLog(@"yujianbo: start CCCrypt");
         [CCCryptHook enableHook];
     }
+    if (getBoolFromPreferences(settingsPreferences, @"KeyChain")) {
+        NSLog(@"yujianbo: start KeyChain");
+        [KeychainHooks enableHooks];
+    }
+    
     [appPreferences release];
     [settingsPreferences release];
     [pool drain];

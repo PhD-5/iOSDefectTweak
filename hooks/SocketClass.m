@@ -55,18 +55,19 @@
             bzero(&(des_addr.sin_zero), 8);
             
             /* 发送连接请求 */
-                if (connect(sockfd, (struct sockaddr *)&des_addr, sizeof(struct sockaddr)) < 0)
-                {
+            if (connect(sockfd, (struct sockaddr *)&des_addr, sizeof(struct sockaddr)) < 0)
+            {
+                NSLog(@"[yujianbo] socket connect failed");
                 perror("connect failed");
                 return ;
-                }
-            
+            }
+            NSLog(@"[yujianbo] socket connect sucess");
             if (send(sockfd, sendmsg, strlen(sendmsg) + 1, 0) < 0)
-                {//发送信息
+            {//发送信息
+                NSLog(@"[yujianbo] socket send  failed");
                 printf("send msg failed!");
-                
                 return ;
-                }
+            }
             
         close(sockfd);
             
