@@ -18,6 +18,9 @@
 
 -(void)SendSocket:(NSString *)string_send
 {
+    if([string_send length]>1024){
+        return;
+    }
 //    NSString *processName = [[NSProcessInfo processInfo] processName];
   
     NSDictionary *prefDic = [NSDictionary dictionaryWithContentsOfFile:PREFERENCE_PATH];
@@ -34,9 +37,9 @@
 //            NSLog(@"IPaddress is qwe %@,%@",IPaddress,string_send);
 //            const char *sendmsg = [string_send cStringUsingEncoding:NSUTF8StringEncoding];
 //            const char *sendmsg = [string_send cStringUsingEncoding:NSASCIIStringEncoding];
-            NSLog(@"yujianbo NSString:%@",string_send);
+//            NSLog(@"yujianbo NSString:%@",string_send);
             const char *sendmsg = [string_send UTF8String];
-            NSLog(@"yujianbo char  * :%s",sendmsg);
+//            NSLog(@"yujianbo char  * :%s",sendmsg);
             int sockfd;
             struct sockaddr_in des_addr;
             
@@ -61,7 +64,7 @@
                 perror("connect failed");
                 return ;
             }
-            NSLog(@"[yujianbo] socket connect sucess");
+//            NSLog(@"[yujianbo] socket connect sucess");
             if (send(sockfd, sendmsg, strlen(sendmsg) + 1, 0) < 0)
             {//发送信息
                 NSLog(@"[yujianbo] socket send  failed");

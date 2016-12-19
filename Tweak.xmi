@@ -30,6 +30,9 @@ SocketClass *gsocket ;
 #include "hooks/KeyboardHook.xm"
 %end
 
+%group PlistHooks 
+#include "hooks/PlistHooks.xm" 
+%end
 
 
 static NSString *applistPreferenceFilePath = @"/private/var/mobile/Library/Preferences/com.softsec.iosdefect.app.plist";
@@ -66,6 +69,7 @@ static BOOL getBoolFromPreferences(NSMutableDictionary *preferences, NSString *p
     //init default tweak
     %init(URL);
     %init(keyboardHook);
+    %init(PlistHooks);
 
     if (getBoolFromPreferences(settingsPreferences, @"MITM")) {
         NSLog(@"yujianbo: start MITM");
