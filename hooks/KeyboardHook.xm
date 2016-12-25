@@ -2,7 +2,7 @@
 #import "Utils.h"
 
 NSMutableString *INPUT = [[NSMutableString alloc] initWithCapacity:100];
-
+extern SocketClass *gsocket;
 //hook the text button
 %hook UIKeyboardImpl
 
@@ -20,10 +20,9 @@ NSMutableString *INPUT = [[NSMutableString alloc] initWithCapacity:100];
     if([INPUT length]>0){
 //        NSString *inputString = [NSString stringWithFormat:@"input:%@",INPUT]; 
         NSString *inputString=[Utils getJsonStrWithDic:INPUT andType:@"input"];
-        SocketClass *mysocket = [[SocketClass alloc] init];
-        NSLog(@"[yujianbo] before send input msg");
-        [mysocket SendSocket:(NSString *)inputString];
-        NSLog(@"[yujianbo] after  send input msg");
+//        SocketClass *mysocket = [[SocketClass alloc] init];
+//        [mysocket SendSocket:(NSString *)inputString];
+        [gsocket SendSocket:(NSString *)inputString];
         [INPUT setString:@""];
     }
     %orig;
@@ -45,10 +44,9 @@ NSMutableString *INPUT = [[NSMutableString alloc] initWithCapacity:100];
         if([INPUT length]>0){
 //            NSString *inputString = [NSString stringWithFormat:@"input:%@",INPUT]; 
             NSString *inputString=[Utils getJsonStrWithDic:INPUT andType:@"input"];
-            SocketClass *mysocket = [[SocketClass alloc] init];
-            NSLog(@"[yujianbo] before send input msg");
-            [mysocket SendSocket:(NSString *)inputString];
-             NSLog(@"[yujianbo] after  send input msg");
+//            SocketClass *mysocket = [[SocketClass alloc] init];
+//            [mysocket SendSocket:(NSString *)inputString];
+            [gsocket SendSocket:(NSString *)inputString];
             [INPUT setString:@""];
         }
     }

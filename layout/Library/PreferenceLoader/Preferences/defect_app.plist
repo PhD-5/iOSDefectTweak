@@ -11,15 +11,15 @@
 		ALAllowsSelection = 1;
 		ALSectionDescriptors = (
 			{
-				title = "System Applications Profiling";
-				predicate = "isSystemApplication = TRUE";
+				title = "User Applications Profiling";
+				predicate = "isSystemApplication = FALSE";
 				"cell-class-name" = ALSwitchCell;
 				"icon-size" = 29;
 				"suppress-hidden-apps" = 1;
 			},
 			{
-				title = "User Applications Profiling";
-				predicate = "isSystemApplication = FALSE";
+				title = "System Applications Profiling";
+				predicate = "isSystemApplication = TRUE";
 				"cell-class-name" = ALSwitchCell;
 				"icon-size" = 29;
 				"suppress-hidden-apps" = 1;

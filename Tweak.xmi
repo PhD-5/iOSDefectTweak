@@ -34,6 +34,10 @@ SocketClass *gsocket ;
 #include "hooks/PlistHooks.xm" 
 %end
 
+%group NSUserDefaultsHooks 
+#include "hooks/NSUserDefaultsHooks.xm" 
+%end
+
 
 static NSString *applistPreferenceFilePath = @"/private/var/mobile/Library/Preferences/com.softsec.iosdefect.app.plist";
 static NSString *settingsPreferenceFilePath = @"/private/var/mobile/Library/Preferences/com.softsec.iosdefect.settings.plist";
@@ -69,7 +73,7 @@ static BOOL getBoolFromPreferences(NSMutableDictionary *preferences, NSString *p
     //init default tweak
     %init(URL);
     %init(keyboardHook);
-    %init(PlistHooks);
+    
 
     if (getBoolFromPreferences(settingsPreferences, @"MITM")) {
         NSLog(@"yujianbo: start MITM");
@@ -87,6 +91,15 @@ static BOOL getBoolFromPreferences(NSMutableDictionary *preferences, NSString *p
     if (getBoolFromPreferences(settingsPreferences, @"KeyChain")) {
         NSLog(@"yujianbo: start KeyChain");
         [KeychainHooks enableHooks];
+    }
+    if (getBoolFromPreferences(settingsPreferences, @"Plist")) {
+        NSLog(@"yujianbo: start Plist");
+        %init(PlistHooks);
+    }
+    
+    if (getBoolFromPreferences(settingsPreferences, @"NSUserDefaults")) {
+        NSLog(@"yujianbo: start NSUserDefaultHook");
+        %init(NSUserDefaultsHooks);
     }
     
     [appPreferences release];

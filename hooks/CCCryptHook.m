@@ -138,7 +138,11 @@ static CCCryptorStatus replaced_CCCrypt(
     
     NSMutableDictionary *mDict = [[NSMutableDictionary alloc] init];
     [mDict setValue:@"CCCrypt" forKey:@"function"];
-//    if(op==0){ //encrypt
+    if(op==0){ //encrypt
+        NSData *inputData = [Utils convertCBuffer:dataIn withLength:dataInLength];
+        [mDict setValue:[[NSString alloc] initWithData:inputData encoding:NSUTF8StringEncoding] forKey:@"inputData"];
+    }
+    
         [mDict setValue:getOperation(op) forKey:@"op"];
         [mDict setValue:getAlgName(alg) forKey:@"alg"];
         [mDict setValue:getOption(options) forKey:@"options"];
