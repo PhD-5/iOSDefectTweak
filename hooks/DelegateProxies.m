@@ -68,6 +68,24 @@ extern SocketClass *gsocket;
     return origResult;
 }
 
+- (void)applicationWillTerminate:(UIApplication *)application{
+    
+    
+    [gsocket SendSocket:@"DONE"];
+    //make sure the socket message is sent
+    int i = 0;
+    while (i < 100)
+    {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
+                                 beforeDate:[NSDate distantFuture]];
+        i++;
+    }
+    
+    [originalDelegate applicationWillTerminate:application];
+    
+    return;
+}
+
 @end
 
 @implementation UIApplicationDelegateProxForTraffic
