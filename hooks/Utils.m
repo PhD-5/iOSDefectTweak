@@ -322,16 +322,16 @@ static NSString *serializedNilValue = @"nil";
 
     // Need to make the content of attributes serializable
     NSMutableDictionary *attributesPlist = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*) attributes];
-
     CFTypeRef secClass = CFDictionaryGetValue(attributes, kSecClass);
-
     if (CFDictionaryContainsKey(attributes, kSecValueData)) {
     	NSData *theData = (NSData *)CFDictionaryGetValue(attributes, kSecValueData);
         NSString *theStr = [[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding];
-        [attributesPlist setObject:theStr forKey:@"kSecValueData"];
+        if(theStr!=nil)
+            [attributesPlist setObject:theStr forKey:@"kSecValueData"];
+        else
+            [attributesPlist setObject:@"error" forKey:@"kSecValueData"];
         [attributesPlist removeObjectForKey:(id)kSecValueData];
     }
-
 
     if ((secClass == kSecClassGenericPassword) || (secClass == kSecClassGenericPassword)) {
         // Nothing to do for passwords
@@ -372,7 +372,6 @@ static NSString *serializedNilValue = @"nil";
         [attributesPlist removeObjectForKey:(id)kSecValuePersistentRef];
         }
     }
-
     return attributesPlist;
 }
 

@@ -24,16 +24,41 @@ static OSStatus replaced_SecItemAdd(CFDictionaryRef attributes, CFTypeRef *resul
 //        [traceStorage saveTracedCall: tracer];
 //        [tracer release];
 //    }
-    
     NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
     [dict setObject:@"SecItemAdd" forKey:@"function"];
     NSDictionary *attributesDict = [Utils convertSecItemAttributesDict:attributes];
-    NSString * str = [Utils getJsonStrWithDic:attributesDict andType:@"KeyChain"];
+    if(attributesDict!=nil){
+        [dict setObject:attributesDict forKey:@"attributes"];
+        NSString * str = [Utils getJsonStrWithDic:dict andType:@"KeyChain"];
+        [gsocket SendSocket:str];
+    }
+    return origResult;
+}
+// Hook SecItemUpdate()
+static OSStatus (*original_SecItemUpdate)(CFDictionaryRef query, CFDictionaryRef attributesToUpdate);
+
+static OSStatus replaced_SecItemUpdate(CFDictionaryRef query, CFDictionaryRef attributesToUpdate){
+    OSStatus origResult = original_SecItemUpdate(query, attributesToUpdate);
+    
+    //    if ([CallStackInspector wasDirectlyCalledByApp]) {
+    //        CallTracer *tracer = [[CallTracer alloc] initWithClass:@"C" andMethod:@"SecItemUpdate"];
+    //        [tracer addArgFromPlistObject:(NSDictionary*)query withKey:@"query"];
+    //        [tracer addArgFromPlistObject:[PlistObjectConverter convertSecItemAttributesDict:attributesToUpdate] withKey:@"attributesToUpdate"];
+    //        [tracer addReturnValueFromPlistObject: [NSNumber numberWithInt:origResult]];
+    //        [traceStorage saveTracedCall: tracer];
+    //        [tracer release];
+    //}
+    NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
+    [dict setObject:@"SecItemUpdate" forKey:@"function"];
+    [dict setObject:(id)query forKey:@"query"];
+    [dict setObject:[Utils convertSecItemAttributesDict:attributesToUpdate] forKey:@"attributesToUpdate"];
+    NSString * str = [Utils getJsonStrWithDic:dict andType:@"KeyChain"];
     [gsocket SendSocket:str];
+    
     return origResult;
 }
 
-
+#if 0
 // Hook SecItemCopyMatching()
 static OSStatus (*original_SecItemCopyMatching)(CFDictionaryRef query, CFTypeRef *result);
 
@@ -72,39 +97,14 @@ static OSStatus replaced_SecItemDelete(CFDictionaryRef query){
     
     return origResult;
 }
-
-
-// Hook SecItemUpdate()
-static OSStatus (*original_SecItemUpdate)(CFDictionaryRef query, CFDictionaryRef attributesToUpdate);
-
-static OSStatus replaced_SecItemUpdate(CFDictionaryRef query, CFDictionaryRef attributesToUpdate){
-    OSStatus origResult = original_SecItemUpdate(query, attributesToUpdate);
-
-//    if ([CallStackInspector wasDirectlyCalledByApp]) {
-//        CallTracer *tracer = [[CallTracer alloc] initWithClass:@"C" andMethod:@"SecItemUpdate"];
-//        [tracer addArgFromPlistObject:(NSDictionary*)query withKey:@"query"];
-//        [tracer addArgFromPlistObject:[PlistObjectConverter convertSecItemAttributesDict:attributesToUpdate] withKey:@"attributesToUpdate"];
-//        [tracer addReturnValueFromPlistObject: [NSNumber numberWithInt:origResult]];
-//        [traceStorage saveTracedCall: tracer];
-//        [tracer release];
-//}
-    NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:@"SecItemUpdate" forKey:@"function"];
-    [dict setObject:(id)query forKey:@"query"];
-    [dict setObject:[Utils convertSecItemAttributesDict:attributesToUpdate] forKey:@"attributesToUpdate"];
-    NSString * str = [Utils getJsonStrWithDic:dict andType:@"KeyChain"];
-    [gsocket SendSocket:str];
-    
-    return origResult;
-}
-
+#endif
 
 @implementation KeychainHooks
 
 + (void)enableHooks {
     MSHookFunction(SecItemAdd, replaced_SecItemAdd, (void **) &original_SecItemAdd);
-    MSHookFunction(SecItemCopyMatching, replaced_SecItemCopyMatching, (void **) &original_SecItemCopyMatching);
-    MSHookFunction(SecItemDelete, replaced_SecItemDelete, (void **) &original_SecItemDelete);
+//    MSHookFunction(SecItemCopyMatching, replaced_SecItemCopyMatching, (void **) &original_SecItemCopyMatching);
+//    MSHookFunction(SecItemDelete, replaced_SecItemDelete, (void **) &original_SecItemDelete);
     MSHookFunction(SecItemUpdate, replaced_SecItemUpdate, (void **) &original_SecItemUpdate);
 }
 
