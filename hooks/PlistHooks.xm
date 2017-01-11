@@ -82,9 +82,6 @@ error:(NSError * _Nullable *)errorPtr{
         NSString *str = [Utils getJsonStrWithDic:dict andType:@"Plist"];
         [gsocket SendSocket:str];
     }
-    [dict setObject:dataStr forKey:@"NSData"];
-    NSString *str = [Utils getJsonStrWithDic:dict andType:@"Plist"];
-    [gsocket SendSocket:str];
     
     BOOL result = %orig;
     return result;

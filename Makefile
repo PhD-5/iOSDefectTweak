@@ -1,5 +1,5 @@
 ADDITIONAL_CCFLAGS  = -Qunused-arguments
-THEOS_DEVICE_IP = 172.20.17.4
+THEOS_DEVICE_IP = 172.24.35.5
 ARCHS = arm64 armv7
 TARGET = iphone:latest:8.0
 

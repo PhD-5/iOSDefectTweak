@@ -70,8 +70,8 @@ extern SocketClass *gsocket;
 
 - (void)applicationWillTerminate:(UIApplication *)application{
     
-    
-    [gsocket SendSocket:@"DONE"];
+    NSString *str = [NSString stringWithFormat:@"DONE:%@",[[NSBundle mainBundle] bundleIdentifier]];
+    [gsocket SendSocket:str];
     //make sure the socket message is sent
     int i = 0;
     while (i < 100)
