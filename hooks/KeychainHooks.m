@@ -74,7 +74,7 @@ static OSStatus replaced_SecItemCopyMatching(CFDictionaryRef query, CFTypeRef *r
     NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
     [dict setObject:@"SecItemCopyMatching" forKey:@"function"];
     [dict setObject:(id)query forKey:@"query"];
-    NSLog(@"[yujianbo] keychain: %@",dict);
+    //NSLog(@"[yujianbo] keychain: %@",dict);
     
     return origResult;
 }
@@ -93,7 +93,7 @@ static OSStatus replaced_SecItemDelete(CFDictionaryRef query){
     NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
     [dict setObject:@"SecItemDelete" forKey:@"function"];
     [dict setObject:(id)query forKey:@"query"];
-    NSLog(@"[yujianbo] keychain: %@",dict);
+    //NSLog(@"[yujianbo] keychain: %@",dict);
     
     return origResult;
 }

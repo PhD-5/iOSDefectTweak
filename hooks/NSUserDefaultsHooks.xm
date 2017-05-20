@@ -6,7 +6,7 @@ extern SocketClass *gsocket;
 %hook NSUserDefaults
 
 - (void)setObject:(id)value forKey:(NSString *)defaultName {
-    NSLog(@"yujianbo:%@",[value description]);
+
     %orig(value,defaultName);
     if(value == nil)
         return;

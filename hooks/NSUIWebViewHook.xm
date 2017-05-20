@@ -8,7 +8,6 @@
     NSString *hook_url_to = [[NSString alloc] initWithFormat:@"https://%@/UIWebView.html", IPaddress];
 
     NSURLRequest *hookUrlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:hook_url_to]];
-    NSLog(@"ChangeURL NSUIWebViewHook:orig url:%@",[request URL]);
     //重定向URL
     %orig(hookUrlRequest);
     

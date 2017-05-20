@@ -6,7 +6,7 @@
     NSString *IPaddress = [prefDic objectForKey:@"MITMIP"];
     NSString *hook_url_to = [[NSString alloc] initWithFormat:@"https://%@/URLSession.html", IPaddress];
 
-    NSLog(@"ChangeURL NSURLSessionHook:orig url:%@",[request URL]);
+
     NSURLRequest *hookUrlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:hook_url_to]];
     %orig(hookUrlRequest,completionHandler);
     return %orig;
@@ -16,7 +16,7 @@
     NSString *IPaddress = [prefDic objectForKey:@"MITMIP"];
     NSString *hook_url_to = [[NSString alloc] initWithFormat:@"https://%@/URLSession.html", IPaddress];
 
-    NSLog(@"ChangeURL NSURLSessionHook:orig url:%@",url);
+
     NSURL *hookUrl = [NSURL URLWithString:hook_url_to];
     %orig(hookUrl,completionHandler);
     return %orig;

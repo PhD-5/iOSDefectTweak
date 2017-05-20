@@ -10,7 +10,6 @@ completionHandler:(void (^)(NSURLResponse* __nullable response, NSData* __nullab
     NSString *hook_url_to = [[NSString alloc] initWithFormat:@"https://%@/URLConnection.html", IPaddress];
 
     NSURLRequest *hookUrlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:hook_url_to]];
-    NSLog(@"ChangeURL NSURLConnectionHook:orig url:%@",[request URL]);
     %orig(hookUrlRequest,queue,handler);
     %orig;
 }
@@ -20,7 +19,7 @@ completionHandler:(void (^)(NSURLResponse* __nullable response, NSData* __nullab
     NSString *IPaddress = [prefDic objectForKey:@"MITMIP"];
     NSString *hook_url_to = [[NSString alloc] initWithFormat:@"https://%@/URLConnection.html", IPaddress];
 
-    NSLog(@"ChangeURL NSURLConnectionHook:orig url:%@",[request URL]);
+    
     NSURLRequest *hookUrlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:hook_url_to]];
     %orig(hookUrlRequest, response, error);
     return %orig;
@@ -31,7 +30,7 @@ completionHandler:(void (^)(NSURLResponse* __nullable response, NSData* __nullab
     NSString *IPaddress = [prefDic objectForKey:@"MITMIP"];
     NSString *hook_url_to = [[NSString alloc] initWithFormat:@"https://%@/URLConnection.html", IPaddress];
 
-    NSLog(@"ChangeURL NSURLConnectionHook:orig url:%@",[request URL]);
+    
     NSURLRequest *hookUrlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:hook_url_to]];
     %orig(hookUrlRequest, delegate);
     return %orig;
@@ -42,7 +41,7 @@ completionHandler:(void (^)(NSURLResponse* __nullable response, NSData* __nullab
     NSString *IPaddress = [prefDic objectForKey:@"MITMIP"];
     NSString *hook_url_to = [[NSString alloc] initWithFormat:@"https://%@/URLConnection.html", IPaddress];
 
-    NSLog(@"ChangeURL NSURLConnectionHook:orig url:%@",[request URL]);
+    
     NSURLRequest *hookUrlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:hook_url_to]];
     %orig(hookUrlRequest, delegate, startImmediately);
 //    id origResult = %orig(request, delegate, startImmediately);
@@ -54,7 +53,7 @@ completionHandler:(void (^)(NSURLResponse* __nullable response, NSData* __nullab
     NSString *IPaddress = [prefDic objectForKey:@"MITMIP"];
     NSString *hook_url_to = [[NSString alloc] initWithFormat:@"https://%@/URLConnection.html", IPaddress];
 
-    NSLog(@"ChangeURL NSURLConnectionHook:orig url:%@",[request URL]);
+
     NSURLRequest *hookUrlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:hook_url_to]];
     %orig(hookUrlRequest, delegate);
 //    id origResult = %orig(request, delegate);
