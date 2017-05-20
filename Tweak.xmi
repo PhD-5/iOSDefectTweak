@@ -14,7 +14,7 @@ SocketClass *gsocket ;
 //Hooks for OC functions
 %group MITM 
 #include "hooks/NSUIWebViewHook.xm" 
-#include "hooks/NSURLConnectionHook.xm" 
+
 #include "hooks/NSURLSessionHook.xm" 
 %end // end group
 
