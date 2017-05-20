@@ -123,6 +123,16 @@
 			<key>key</key>
 			<string>ServerPort</string>
 		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>defaults</key>
+			<string>com.softsec.iosdefect.socket.plist</string>
+			<key>label</key>
+			<string>MITM Server IP</string>
+			<key>key</key>
+			<string>MITMIP</string>
+		</dict>
 	</array>
 	<key>title</key>
 	<string>iOS Defect Analyse Functions</string>
