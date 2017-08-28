@@ -26,7 +26,6 @@ static OSStatus replaced_SSLWrite(SSLContextRef context,
                                   size_t dataLength, 
                                   size_t *processed){
 //    SocketClass *socket = [[SocketClass alloc] init];
-    NSString *bundleID = [[NSBundle mainBundle]bundleIdentifier];
 //    NSString *appName = [[[NSBundle mainBundle]infoDictionary] objectForKey:@"CFBundleDisplayName"];
     NSData *ocData = [NSData dataWithBytes:data length:dataLength];
     NSString *ocStr = [[NSString alloc] initWithData:ocData encoding:NSUTF8StringEncoding];
